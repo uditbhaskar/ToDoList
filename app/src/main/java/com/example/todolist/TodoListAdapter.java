@@ -18,13 +18,10 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
 
     Context context;
     ArrayList<TodoModel> todoList;
-    Updating updateUI;
 
     TodoListAdapter(Context context, ArrayList<TodoModel> list) {
         this.todoList = list;
         this.context = context;
-        this.updateUI = updateUI;
-
     }
 
     @NonNull
