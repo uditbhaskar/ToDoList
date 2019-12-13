@@ -32,7 +32,6 @@ public class TodoListActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void setRecyclerView(ArrayList<TodoModel> list){
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new TodoListAdapter(this, list);
         recyclerView.setAdapter(adapter);
@@ -40,6 +39,7 @@ public class TodoListActivity extends AppCompatActivity implements View.OnClickL
 
     public void LoadQuery(){
         todoList = new ArrayList<>();
+        todoList.clear();
         DBManager dbManager = new DBManager(this);
         String[] projections = {"_id","title","description","time"};
         String[] selectionArgs = {""};
@@ -61,10 +61,11 @@ public class TodoListActivity extends AppCompatActivity implements View.OnClickL
                 }while (cursor.moveToNext());
             }
         }
-        if(todoList != null && !todoList.isEmpty()){
+        if(todoList != null){
             Collections.reverse(todoList);
             setRecyclerView(todoList);
         }
+
     }
 
     @Override
@@ -79,6 +80,5 @@ public class TodoListActivity extends AppCompatActivity implements View.OnClickL
             startActivity(new Intent(TodoListActivity.this, DetailActivity.class));
         }
     }
-
 
 }

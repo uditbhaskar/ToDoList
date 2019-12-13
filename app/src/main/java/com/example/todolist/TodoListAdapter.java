@@ -18,9 +18,13 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
 
     Context context;
     ArrayList<TodoModel> todoList;
+    Updating updateUI;
+
     TodoListAdapter(Context context, ArrayList<TodoModel> list) {
         this.todoList = list;
         this.context = context;
+        this.updateUI = updateUI;
+
     }
 
     @NonNull
@@ -72,6 +76,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
             }
             else if(v.getId() == R.id.delete){
                 deleteTodo(todoList.get(getAdapterPosition()));
+                ((TodoListActivity)context).LoadQuery();
             }
 
         }
@@ -81,8 +86,10 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
             String[] selectionArgs = {item.getNoteId() + ""};
             dbManager.Delete("_id=?", selectionArgs);
             Toast.makeText(context, "Todo deleted!!", Toast.LENGTH_SHORT).show();
+
         }
 
     }
+
 
 }
